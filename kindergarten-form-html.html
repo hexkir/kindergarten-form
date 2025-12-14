@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заявление о отсутствии ребенка</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            @page {
+                margin: 2cm;
+            }
+            .no-print {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-50">
+    <div class="min-h-screen p-4 md:p-8">
+        <div class="max-w-4xl mx-auto">
+            <!-- Input Form -->
+            <div class="no-print bg-white rounded-lg shadow-md p-4 md:p-6 mb-8">
+                <h1 class="text-2xl font-bold text-gray-800 mb-6">Заявление о отсутствии ребенка</h1>
+                
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            Название детского сада
+                        </label>
+                        <input
+                            type="text"
+                            id="kindergartenName"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="ГБДОУ детский сад №120"
+                            value="ГБДОУ детский сад №120"
+                        />
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            Район
+                        </label>
+                        <input
+                            type="text"
+                            id="district"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="Выборгского района"
+                            value="Выборгского района"
+                        />
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            ФИО заведующего
+                        </label>
+                        <input
+                            type="text"
+                            id="headName"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="Соколовой М.В."
+                            value="Соколовой М.В."
+                        />
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            ФИО родителя (полностью)
+                        </label>
+                        <input
+                            type="text"
+                            id="parentFullName"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="Иванов Иван Иванович"
+                        />
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            ФИО ребенка (фамилия, имя, отчество)
+                        </label>
+                        <input
+                            type="text"
+                            id="childFullName"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="Иванов Петр Иванович"
+                        />
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            Номер группы
+                        </label>
+                        <input
+                            type="text"
+                            id="groupNumber"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="5"
+                        />
+                    </div>
+
+                    <div class="flex gap-3">
+                        <button
+                            onclick="saveData()"
+                            class="flex-1 bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 transition-colors flex items-center justify-center font-medium"
+                        >
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/>
+                            </svg>
+                            Сохранить данные
+                        </button>
+                        
+                        <button
+                            onclick="clearData()"
+                            class="bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700 transition-colors flex items-center justify-center font-medium"
+                        >
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div id="savedMessage" class="text-center text-green-600 font-medium hidden"></div>
+
+                    <hr class="my-6" />
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Дата начала отсутствия
+                            </label>
+                            <input
+                                type="date"
+                                id="startDate"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                onchange="updateForm()"
+                            />
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Дата окончания отсутствия
+                            </label>
+                            <input
+                                type="date"
+                                id="endDate"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                onchange="updateForm()"
+                            />
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            Дата подачи заявления
+                        </label>
+                        <input
+                            type="date"
+                            id="applicationDate"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            onchange="updateForm()"
+                        />
+                    </div>
+
+                    <button
+                        onclick="window.print()"
+                        class="w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 transition-colors flex items-center justify-center font-medium"
+                    >
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+                        </svg>
+                        Печать заявления
+                    </button>
+                </div>
+            </div>
+
+            <!-- Printable Document -->
+            <div class="bg-white p-8 md:p-12 shadow-lg" style="font-family: 'Times New Roman', serif;">
+                <div class="text-right mb-8">
+                    <div class="inline-block text-left">
+                        <p class="mb-1">Заведующему</p>
+                        <p class="mb-1" id="printKindergartenName">ГБДОУ детский сад №120</p>
+                        <p class="mb-1" id="printDistrict">Выборгского района</p>
+                        <p class="mb-3" style="text-decoration: underline;" id="printHeadName">Соколовой М.В.</p>
+                        <p class="mb-1">от Законного представителя</p>
+                        <p class="border-b border-black mb-1 min-w-[300px]" id="printParentFullName">_____________________________</p>
+                        <p class="text-sm italic text-gray-600 mb-2">(фамилия, имя, отчество родителя полностью)</p>
+                        <p class="border-b border-black mb-1 min-w-[300px]" id="printChildFullName">_____________________________</p>
+                        <p class="text-sm italic text-gray-600">(фамилия, имя ребёнка)</p>
+                    </div>
+                </div>
+
+                <h2 class="text-center font-bold mb-6 text-lg">ЗАЯВЛЕНИЕ</h2>
+
+                <div class="space-y-4 text-justify leading-relaxed">
+                    <p>Прошу разрешить не приводить в детский сад моего ребенка</p>
+                    
+                    <p class="border-b border-black inline-block min-w-[400px]" id="printChildFullName2">___________________________________________</p>
+                    <p class="text-sm italic text-gray-600 mb-4">(фамилия, имя, отчество ребёнка)</p>
+
+                    <p>группа №<span class="border-b border-black inline-block min-w-[50px] text-center" id="printGroupNumber">_____</span></p>
+
+                    <p class="mt-4" id="printDates">
+                        с «<span class="border-b border-black inline-block min-w-[40px] text-center">___</span>» <span class="border-b border-black inline-block min-w-[120px] text-center">___________</span> 202<span class="border-b border-black inline-block min-w-[30px] text-center">_</span> г. по «<span class="border-b border-black inline-block min-w-[40px] text-center">___</span>» <span class="border-b border-black inline-block min-w-[120px] text-center">___________</span> 202<span class="border-b border-black inline-block min-w-[30px] text-center">_</span> г.
+                    </p>
+
+                    <p class="mt-4">по семейным обстоятельствам.</p>
+
+                    <p class="mt-6">Ответственность за здоровье и безопасность ребёнка в этот период беру на себя.</p>
+
+                    <div class="mt-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+                        <div>
+                            <p id="printApplicationDate">
+                                «<span class="border-b border-black inline-block min-w-[40px] text-center">___</span>» <span class="border-b border-black inline-block min-w-[120px] text-center">___________</span> 202<span class="border-b border-black inline-block min-w-[30px] text-center">_</span> г.
+                            </p>
+                        </div>
+                        <div class="flex items-end gap-8">
+                            <div class="text-center">
+                                <p class="border-b border-black min-w-[150px] mb-1">&nbsp;</p>
+                                <p class="text-sm">(подпись)</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="border-b border-black min-w-[200px] mb-1" id="printSignature">&nbsp;</p>
+                                <p class="text-sm">(расшифровка)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize dates
+        const today = new Date();
+        const yesterday = new Date(today);
+        yesterday.setDate(yesterday.getDate() - 1);
+        
+        document.getElementById('endDate').valueAsDate = yesterday;
+        document.getElementById('applicationDate').valueAsDate = today;
+
+        // Load saved data
+        function loadData() {
+            const saved = localStorage.getItem('kindergartenFormData');
+            if (saved) {
+                const data = JSON.parse(saved);
+                document.getElementById('kindergartenName').value = data.kindergartenName || 'ГБДОУ детский сад №120';
+                document.getElementById('district').value = data.district || 'Выборгского района';
+                document.getElementById('headName').value = data.headName || 'Соколовой М.В.';
+                document.getElementById('parentFullName').value = data.parentFullName || '';
+                document.getElementById('childFullName').value = data.childFullName || '';
+                document.getElementById('groupNumber').value = data.groupNumber || '';
+            }
+            updateForm();
+        }
+
+        // Save data
+        function saveData() {
+            const data = {
+                kindergartenName: document.getElementById('kindergartenName').value,
+                district: document.getElementById('district').value,
+                headName: document.getElementById('headName').value,
+                parentFullName: document.getElementById('parentFullName').value,
+                childFullName: document.getElementById('childFullName').value,
+                groupNumber: document.getElementById('groupNumber').value
+            };
+            localStorage.setItem('kindergartenFormData', JSON.stringify(data));
+            showMessage('✓ Данные сохранены');
+        }
+
+        // Clear data
+        function clearData() {
+            localStorage.removeItem('kindergartenFormData');
+            document.getElementById('kindergartenName').value = 'ГБДОУ детский сад №120';
+            document.getElementById('district').value = 'Выборгского района';
+            document.getElementById('headName').value = 'Соколовой М.В.';
+            document.getElementById('parentFullName').value = '';
+            document.getElementById('childFullName').value = '';
+            document.getElementById('groupNumber').value = '';
+            updateForm();
+            showMessage('✓ Данные удалены');
+        }
+
+        // Show message
+        function showMessage(text) {
+            const el = document.getElementById('savedMessage');
+            el.textContent = text;
+            el.classList.remove('hidden');
+            setTimeout(() => el.classList.add('hidden'), 3000);
+        }
+
+        // Format date
+        function formatDate(dateString) {
+            if (!dateString) return { day: '', month: '', year: '' };
+            const date = new Date(dateString);
+            const day = date.getDate();
+            const monthNames = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 
+                                'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+            const month = monthNames[date.getMonth()];
+            const year = date.getFullYear();
+            return { day, month, year };
+        }
+
+        // Format signature
+        function formatSignature(fullName) {
+            if (!fullName) return '';
+            
+            const parts = fullName.trim().split(/\s+/);
+            
+            if (parts.length === 1) {
+                return parts[0];
+            }
+            
+            if (fullName.includes('.')) {
+                return fullName;
+            }
+            
+            if (parts.length >= 2) {
+                const surname = parts[0];
+                const firstInitial = parts[1] ? parts[1][0] + '.' : '';
+                const middleInitial = parts[2] ? parts[2][0] + '.' : '';
+                return `${surname} ${firstInitial}${middleInitial}`.trim();
+            }
+            
+            return fullName;
+        }
+
+        // Update form
+        function updateForm() {
+            const kindergartenName = document.getElementById('kindergartenName').value;
+            const district = document.getElementById('district').value;
+            const headName = document.getElementById('headName').value;
+            const parentFullName = document.getElementById('parentFullName').value;
+            const childFullName = document.getElementById('childFullName').value;
+            const groupNumber = document.getElementById('groupNumber').value;
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            const applicationDate = document.getElementById('applicationDate').value;
+
+            document.getElementById('printKindergartenName').textContent = kindergartenName || 'ГБДОУ детский сад №120';
+            document.getElementById('printDistrict').textContent = district || 'Выборгского района';
+            document.getElementById('printHeadName').textContent = headName || 'Соколовой М.В.';
+            document.getElementById('printParentFullName').textContent = parentFullName || '_____________________________';
+            document.getElementById('printChildFullName').textContent = childFullName || '_____________________________';
+            document.getElementById('printChildFullName2').textContent = childFullName || '___________________________________________';
+            document.getElementById('printGroupNumber').textContent = groupNumber || '_____';
+            document.getElementById('printSignature').textContent = formatSignature(parentFullName);
+
+            const start = formatDate(startDate);
+            const end = formatDate(endDate);
+            const app = formatDate(applicationDate);
+
+            document.getElementById('printDates').innerHTML = `
+                с «<span class="border-b border-black inline-block min-w-[40px] text-center">${start.day || '___'}</span>» <span class="border-b border-black inline-block min-w-[120px] text-center">${start.month || '___________'}</span> 202<span class="border-b border-black inline-block min-w-[30px] text-center">${start.year ? start.year.toString().slice(-1) : '_'}</span> г. по «<span class="border-b border-black inline-block min-w-[40px] text-center">${end.day || '___'}</span>» <span class="border-b border-black inline-block min-w-[120px] text-center">${end.month || '___________'}</span> 202<span class="border-b border-black inline-block min-w-[30px] text-center">${end.year ? end.year.toString().slice(-1) : '_'}</span> г.
+            `;
+
+            document.getElementById('printApplicationDate').innerHTML = `
+                «<span class="border-b border-black inline-block min-w-[40px] text-center">${app.day || '___'}</span>» <span class="border-b border-black inline-block min-w-[120px] text-center">${app.month || '___________'}</span> 202<span class="border-b border-black inline-block min-w-[30px] text-center">${app.year ? app.year.toString().slice(-1) : '_'}</span> г.
+            `;
+        }
+
+        // Add input listeners
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', updateForm);
+        });
+
+        // Load on start
+        loadData();
+    </script>
+</body>
+</html>
