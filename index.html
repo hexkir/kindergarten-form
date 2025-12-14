@@ -158,7 +158,7 @@
                                 type="date"
                                 id="endDate"
                                 class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                onchange="updateForm()"
+                                onchange="updateApplicationDate(); updateForm();"
                             />
                         </div>
                     </div>
@@ -255,6 +255,19 @@
         
         document.getElementById('endDate').valueAsDate = yesterday;
         document.getElementById('applicationDate').valueAsDate = today;
+
+        // Update application date based on end date
+        function updateApplicationDate() {
+            const endDateInput = document.getElementById('endDate');
+            const applicationDateInput = document.getElementById('applicationDate');
+            
+            if (endDateInput.value) {
+                const endDate = new Date(endDateInput.value);
+                const nextDay = new Date(endDate);
+                nextDay.setDate(nextDay.getDate() + 1);
+                applicationDateInput.valueAsDate = nextDay;
+            }
+        }
 
         // Load saved data
         function loadData() {
