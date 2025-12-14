@@ -12,10 +12,19 @@
                 padding: 0;
             }
             @page {
-                margin: 2cm;
+                margin: 1.5cm;
+                size: A4;
             }
             .no-print {
                 display: none !important;
+            }
+            .print-container {
+                page-break-after: avoid;
+                page-break-inside: avoid;
+            }
+            html, body {
+                height: auto;
+                overflow: visible;
             }
         }
     </style>
@@ -183,7 +192,7 @@
             </div>
 
             <!-- Printable Document -->
-            <div class="bg-white p-8 md:p-12 shadow-lg" style="font-family: 'Times New Roman', serif;">
+            <div class="bg-white p-8 md:p-12 shadow-lg print-container" style="font-family: 'Times New Roman', serif;">
                 <div class="text-right mb-8">
                     <div class="inline-block text-left">
                         <p class="mb-1">Заведующему</p>
