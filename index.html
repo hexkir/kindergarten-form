@@ -137,30 +137,26 @@
 
                     <hr class="my-6" />
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">
-                                Дата начала отсутствия
-                            </label>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            Период отсутствия
+                        </label>
+                        <div class="flex items-center gap-2 p-3 border border-gray-300 rounded-md bg-white">
                             <input
                                 type="date"
                                 id="startDate"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                onchange="updateForm()"
+                                class="flex-1 border-0 focus:ring-0 focus:outline-none"
+                                onchange="updateEndDateMin(); updateForm();"
                             />
-                        </div>
-
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">
-                                Дата окончания отсутствия
-                            </label>
+                            <span class="text-gray-400">→</span>
                             <input
                                 type="date"
                                 id="endDate"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                class="flex-1 border-0 focus:ring-0 focus:outline-none"
                                 onchange="updateApplicationDate(); updateForm();"
                             />
                         </div>
+                        <p class="text-xs text-gray-500 mt-1">Выберите даты начала и окончания отсутствия</p>
                     </div>
 
                     <div>
@@ -266,6 +262,21 @@
                 const nextDay = new Date(endDate);
                 nextDay.setDate(nextDay.getDate() + 1);
                 applicationDateInput.valueAsDate = nextDay;
+            }
+        }
+
+        // Update end date minimum to prevent selecting date before start
+        function updateEndDateMin() {
+            const startDateInput = document.getElementById('startDate');
+            const endDateInput = document.getElementById('endDate');
+            
+            if (startDateInput.value) {
+                endDateInput.min = startDateInput.value;
+                // If end date is before start date, update it
+                if (endDateInput.value && endDateInput.value < startDateInput.value) {
+                    endDateInput.value = startDateInput.value;
+                    updateApplicationDate();
+                }
             }
         }
 
