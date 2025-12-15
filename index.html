@@ -11,14 +11,19 @@
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
-            html, body {
-                height: 99% !important;
+            html {
+                height: auto !important;
                 margin: 0 !important;
                 padding: 0 !important;
-                overflow: hidden !important;
+            }
+            body {
+                height: auto !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                background: white !important;
             }
             @page {
-                margin: 1cm;
+                margin: 1.5cm;
                 size: A4 portrait;
             }
             .no-print {
@@ -27,10 +32,14 @@
             .print-container {
                 page-break-after: avoid !important;
                 page-break-inside: avoid !important;
-                padding: 0.3cm !important;
+                break-inside: avoid !important;
+                padding: 0 !important;
                 margin: 0 !important;
                 box-shadow: none !important;
-                height: auto !important;
+                background: white !important;
+            }
+            .print-container > * {
+                margin-bottom: 0 !important;
             }
         }
     </style>
