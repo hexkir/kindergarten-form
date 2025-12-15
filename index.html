@@ -11,19 +11,14 @@
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
-            html {
-                height: auto !important;
+            html, body {
+                height: 99% !important;
                 margin: 0 !important;
                 padding: 0 !important;
-            }
-            body {
-                height: auto !important;
-                margin: 0 !important;
-                padding: 0 !important;
-                background: white !important;
+                overflow: hidden !important;
             }
             @page {
-                margin: 1.5cm;
+                margin: 1cm;
                 size: A4 portrait;
             }
             .no-print {
@@ -32,14 +27,10 @@
             .print-container {
                 page-break-after: avoid !important;
                 page-break-inside: avoid !important;
-                break-inside: avoid !important;
-                padding: 0 !important;
+                padding: 0.3cm !important;
                 margin: 0 !important;
                 box-shadow: none !important;
-                background: white !important;
-            }
-            .print-container > * {
-                margin-bottom: 0 !important;
+                height: auto !important;
             }
         }
     </style>
@@ -410,44 +401,27 @@
             const endDate = document.getElementById('endDate').value;
             const applicationDate = document.getElementById('applicationDate').value;
 
-            // Safely update elements only if they exist
-            const printKG = document.getElementById('printKindergartenName');
-            const printDist = document.getElementById('printDistrict');
-            const printHead = document.getElementById('printHeadName');
-            const printParent = document.getElementById('printParentFullName');
-            const printChild1 = document.getElementById('printChildFullName');
-            const printChild2 = document.getElementById('printChildFullName2');
-            const printGroup = document.getElementById('printGroupNumber');
-            const printReas = document.getElementById('printReason');
-            const printSign = document.getElementById('printSignature');
-
-            if (printKG) printKG.textContent = kindergartenName || 'ГБДОУ детский сад №120';
-            if (printDist) printDist.textContent = district || 'Выборгского района';
-            if (printHead) printHead.textContent = headName || 'Соколовой М.В.';
-            if (printParent) printParent.textContent = parentFullName || '_____________________________';
-            if (printChild1) printChild1.textContent = childFullName || '_____________________________';
-            if (printChild2) printChild2.textContent = childFullName || '___________________________________________';
-            if (printGroup) printGroup.textContent = groupNumber || '_____';
-            if (printReas) printReas.textContent = reason || 'по семейным обстоятельствам';
-            if (printSign) printSign.textContent = formatSignature(parentFullName);
+            document.getElementById('printKindergartenName').textContent = kindergartenName || 'ГБДОУ детский сад №120';
+            document.getElementById('printDistrict').textContent = district || 'Выборгского района';
+            document.getElementById('printHeadName').textContent = headName || 'Соколовой М.В.';
+            document.getElementById('printParentFullName').textContent = parentFullName || '_____________________________';
+            document.getElementById('printChildFullName').textContent = childFullName || '_____________________________';
+            document.getElementById('printChildFullName2').textContent = childFullName || '___________________________________________';
+            document.getElementById('printGroupNumber').textContent = groupNumber || '_____';
+            document.getElementById('printReason').textContent = reason || 'по семейным обстоятельствам';
+            document.getElementById('printSignature').textContent = formatSignature(parentFullName);
 
             const start = formatDate(startDate);
             const end = formatDate(endDate);
             const app = formatDate(applicationDate);
 
-            const printDates = document.getElementById('printDates');
-            if (printDates) {
-                printDates.innerHTML = `
-                    с «<span class="border-b border-black inline-block min-w-[40px] text-center">${start.day || '___'}</span>» <span class="border-b border-black inline-block min-w-[120px] text-center">${start.month || '___________'}</span> 202<span class="border-b border-black inline-block min-w-[30px] text-center">${start.year ? start.year.toString().slice(-1) : '_'}</span> г. по «<span class="border-b border-black inline-block min-w-[40px] text-center">${end.day || '___'}</span>» <span class="border-b border-black inline-block min-w-[120px] text-center">${end.month || '___________'}</span> 202<span class="border-b border-black inline-block min-w-[30px] text-center">${end.year ? end.year.toString().slice(-1) : '_'}</span> г.
-                `;
-            }
+            document.getElementById('printDates').innerHTML = `
+                с «<span class="border-b border-black inline-block min-w-[40px] text-center">${start.day || '___'}</span>» <span class="border-b border-black inline-block min-w-[120px] text-center">${start.month || '___________'}</span> 202<span class="border-b border-black inline-block min-w-[30px] text-center">${start.year ? start.year.toString().slice(-1) : '_'}</span> г. по «<span class="border-b border-black inline-block min-w-[40px] text-center">${end.day || '___'}</span>» <span class="border-b border-black inline-block min-w-[120px] text-center">${end.month || '___________'}</span> 202<span class="border-b border-black inline-block min-w-[30px] text-center">${end.year ? end.year.toString().slice(-1) : '_'}</span> г.
+            `;
 
-            const printAppDate = document.getElementById('printApplicationDate');
-            if (printAppDate) {
-                printAppDate.innerHTML = `
-                    «<span class="border-b border-black inline-block min-w-[40px] text-center">${app.day || '___'}</span>» <span class="border-b border-black inline-block min-w-[120px] text-center">${app.month || '___________'}</span> 202<span class="border-b border-black inline-block min-w-[30px] text-center">${app.year ? app.year.toString().slice(-1) : '_'}</span> г.
-                `;
-            }
+            document.getElementById('printApplicationDate').innerHTML = `
+                «<span class="border-b border-black inline-block min-w-[40px] text-center">${app.day || '___'}</span>» <span class="border-b border-black inline-block min-w-[120px] text-center">${app.month || '___________'}</span> 202<span class="border-b border-black inline-block min-w-[30px] text-center">${app.year ? app.year.toString().slice(-1) : '_'}</span> г.
+            `;
         }
 
         // Add input listeners
