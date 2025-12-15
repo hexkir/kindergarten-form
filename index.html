@@ -8,13 +8,13 @@
     <style>
         @media print {
             * {
-                margin: 0 !important;
-                padding: 0 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
             }
-            body {
+            html, body {
+                height: 99% !important;
                 margin: 0 !important;
                 padding: 0 !important;
-                height: 100vh !important;
                 overflow: hidden !important;
             }
             @page {
@@ -29,8 +29,8 @@
                 page-break-inside: avoid !important;
                 padding: 0.3cm !important;
                 margin: 0 !important;
-                height: auto !important;
                 box-shadow: none !important;
+                height: auto !important;
             }
         }
     </style>
